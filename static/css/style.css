@@ -1,0 +1,41 @@
+/* remove default margin and padding from body */
+.container-fluid {
+    align-items: center;
+}
+.body {
+    margin: 0;
+    padding: 50px;
+    padding-bottom: 50px;
+}
+
+
+/* set map, body, and html to 100% of the screen size */
+
+#map,
+.body,
+.html {
+    height: 500px;
+    width: 700px;
+}
+
+
+/* add background image and center on page */
+
+#map {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+/* #map>img {
+    height: 50px;
+    width: 50px;
+} */
+
+#typepie {
+    height: 500px;
+    width: 20px;
+}
+.rowheader{
+    align-content: center;
+}

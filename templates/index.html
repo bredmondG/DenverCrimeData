@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>University of Denver Crime Data</title>
+
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Leaflet CSS & JS-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
+
+    <!-- Leaflet Heatmap -->
+    <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
+
+    <!-- d3 JavaScript -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+    <!-- plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="rowheader">
+            <div class="col-md-12 jumbotron text-center">
+                <h1>University of Denver Crime Map</h1>
+                <p>Use the interactive charts below to explore the dataset</p>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="well">
+                    <h5>SELECT Sample:</h5>
+                    <select id="selCrime" onchange="optionChanged()"></select>
+                </div>
+                <div class="well">
+                    <h5>SELECT Sample:</h5>
+                    <select id="selLocation" onchange="optionChanged()"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <!-- The div where we will inject our map -->
+                <div id="map">
+                    <img src="static/img/loading.gif">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- pie chart div -->
+                <div id="typepie"></div>
+                <div id="catpie"></div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <!-- API key -->
+    <script type="text/javascript" src="/static/js/config.js"></script>
+    <!-- Our JS -->
+    <script type="text/javascript" src="/static/js/app.js"></script>
+</body>
+
+</html>
