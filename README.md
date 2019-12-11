@@ -9,5 +9,5 @@ Used plotly to show the percentages of types of crimes based on neighborhood.
 
 Runs on a Flask framework.
 
-![Screenshot](DenverCrimeData/Crime Map Screen Shot.pdf)
+![Screenshot](crimemap_screenshot.png)
    
