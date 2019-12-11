@@ -1,7 +1,9 @@
 /* remove default margin and padding from body */
+
 .container-fluid {
     align-items: center;
 }
+
 .body {
     margin: 0;
     padding: 50px;
@@ -27,6 +29,7 @@
     justify-content: center;
 }
 
+
 /* #map>img {
     height: 50px;
     width: 50px;
@@ -36,6 +39,7 @@
     height: 500px;
     width: 20px;
 }
-.rowheader{
+
+.rowheader {
     align-content: center;
 }

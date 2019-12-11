@@ -61,7 +61,7 @@ def streetlights():
 @app.route("/crimeMap/<crime>/<location>")
 def crimeMap(crime, location):
     """return crimemap data"""
-    df = pd.read_sql('''SELECT crimedata."ID", crimedata."CRIME_CATEGORY", crimedata."CRIME_OFFENSE",  crimedata."CRIME_ADDRESS", crimedata.longitude, crimedata.latitude, crimedata.neighborhood 
+    df = pd.read_sql('''SELECT crimedata."ID", crimedata."CRIME_CATEGORY", crimedata."CRIME_OFFENSE", crimedata."Date",  crimedata."CRIME_ADDRESS", crimedata.longitude, crimedata.latitude, crimedata.neighborhood 
     FROM crimedata ''', db.session.bind)
     
     locDF = df[df["neighborhood"] == location]

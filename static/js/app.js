@@ -87,16 +87,17 @@ d3.json('/bikeracks', function(bikeRacks) {
 
 
         // add marker to map if located near University of Denver
-        if (
-            bikeRack.latitude > 39.6604741 &&
-            bikeRack.latitude < 39.6893281 &&
-            bikeRack.longitude > -104.9897327 &&
-            bikeRack.longitude < -104.9429236
-        ) {
-            bikeLatLngs.push([bikeRack.latitude, bikeRack.longitude])
-            bikeRackMarkers.push(
-                L.marker([bikeRack.latitude, bikeRack.longitude], { icon: bikeRackIcon })
-            )
+        if (bikeRack.latitude && bikeRack.longitude !== null) {
+
+            // add marker to map if located near University of Denver
+            if (
+                myMap.getBounds().contains([bikeRack.latitude, bikeRack.longitude])
+
+            ) {
+                bikeRackMarkers.push(
+                    L.marker([bikeRack.latitude, bikeRack.longitude], { icon: bikeRackIcon })
+                )
+            }
         }
     }
 
@@ -107,6 +108,7 @@ d3.json('/bikeracks', function(bikeRacks) {
 
     // decrement remainingCalls by 1
     --remainingCalls;
+    console.log(myMap.getBounds())
     console.log(`Fetched bike racks. Remaining calls: ${remainingCalls}`)
 
     // check if ready to call createMap function
@@ -124,6 +126,7 @@ var streetLightIcon = L.icon({
     // popupAnchor:  [0, -15] // point from which the popup should open relative to the iconAnchor
 });
 
+
 // fetch street light data
 d3.json('/streetlights', function(streetLights) {
     // array to store bike rack markers
@@ -133,16 +136,19 @@ d3.json('/streetlights', function(streetLights) {
         // create a reference variable for each object
         var streetLight = streetLights[i];
 
-        // add marker to map if located near University of Denver
-        if (
-            streetLight.latitude > 39.6604741 &&
-            streetLight.latitude < 39.6893281 &&
-            streetLight.longitude > -104.9897327 &&
-            streetLight.longitude < -104.9429236
-        ) {
-            streetLightMarkers.push(
-                L.marker([streetLight.latitude, streetLight.longitude], { icon: streetLightIcon })
-            )
+
+
+        if (streetLight.latitude && streetLight.longitude !== null) {
+
+            // add marker to map if located near University of Denver
+            if (
+                myMap.getBounds().contains([streetLight.latitude, streetLight.longitude])
+
+            ) {
+                streetLightMarkers.push(
+                    L.marker([streetLight.latitude, streetLight.longitude], { icon: streetLightIcon })
+                )
+            }
         }
     }
 
@@ -160,6 +166,7 @@ d3.json('/streetlights', function(streetLights) {
 });
 
 
+
 // fetch crime data
 d3.json('/crimes', function(crimes) {
     // array to store crime coordinates
@@ -170,6 +177,7 @@ d3.json('/crimes', function(crimes) {
         var crime = crimes[i];
 
         // add marker to map if located near University of Denver
+
         if (
             crime.latitude > 39.6604741 &&
             crime.latitude < 39.6893281 &&
@@ -245,24 +253,23 @@ function populateMapCrime(crime, location) {
             var theft = theftData[i];
 
             // add marker to map if located near University of Denver
-
-            L.marker([theft.latitude, theft.longitude])
-                .bindPopup(
-                    `<p>Address: ${theft.CRIME_ADDRESS}<br 
+            if (theft.latitude && theft.longitude !== null) {
+                L.marker([theft.latitude, theft.longitude])
+                    .bindPopup(
+                        `<p>Address: ${theft.CRIME_ADDRESS}<br 
                 />Date: ${theft.Date}<br
                 />Crime: ${theft.CRIME_CATEGORY}
                 </p>`).openPopup()
-                .addTo(crimeGroup)
+                    .addTo(crimeGroup)
+            }
 
 
         }
         myMap.fitBounds(crimeGroup.getBounds());
-        if (crimeGroup) {
-            crimeGroup.addTo(myMap)
-            console.log(crimeGroup.layers)
-        } else {
-            console.log("no crime in area")
-        }
+
+        console.log(myMap.getBounds())
+        crimeGroup.addTo(myMap)
+
 
     })
 }
@@ -312,7 +319,6 @@ function optionChanged() {
     var result = e.options[e.selectedIndex].value;
     console.log(crimeGroup.length != 0)
     console.log(result)
-    console.log(crimeSelector)
     populateMapCrime(crimeResult, locResult);
 
 }
